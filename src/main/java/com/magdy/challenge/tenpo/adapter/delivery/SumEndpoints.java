@@ -1,4 +1,4 @@
-package com.magdy.challenge.tenpo.adapter;
+package com.magdy.challenge.tenpo.adapter.delivery;
 
 public class SumEndpoints {
 

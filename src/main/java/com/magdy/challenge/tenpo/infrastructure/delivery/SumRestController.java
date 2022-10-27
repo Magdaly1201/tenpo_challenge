@@ -1,6 +1,6 @@
 package com.magdy.challenge.tenpo.infrastructure.delivery;
 
-import com.magdy.challenge.tenpo.adapter.SumEndpoints;
+import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
