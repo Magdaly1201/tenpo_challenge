@@ -26,6 +26,7 @@ public class CacheConfig {
 
     @CacheEvict(allEntries = true, value = {PERCENTAGE})
     @Scheduled(fixedDelay = 30 * 60 * 1000, initialDelay = 60 * 1000)
+
     public void reportCacheEvict() {
         System.out.println("Flush Cache " + LocalDate.now());
     }
