@@ -12,9 +12,10 @@ public class PercentageService {
         this.percentageClient = percentageClient;
     }
 
-    public Integer percentage(int value){
+    public float percentage(int value){
         try {
-            return percentageClient.getPercentage().orElseThrow(()-> new RuntimeException("ERROR: not value for percentage"));
+            Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
+            return(percentage * value) / 100;
         } catch (IOException e) {
            throw new RuntimeException("ERROR: not value for percentage");
         }

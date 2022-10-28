@@ -3,6 +3,7 @@ package com.magdy.challenge.tenpo.infrastructure.app.config;
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
+import com.magdy.challenge.tenpo.core.sum.SumService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,16 @@ public class SpringDependenciesBean {
     }
 
     @Bean
-    public SumEndpoints sumEndpoints() {
-        return new SumEndpoints(percentageService());
+    public SumService sumService(){
+        return new SumService(percentageService());
     }
+
+    @Bean
+    public SumEndpoints sumEndpoints() {
+        return new SumEndpoints(sumService());
+    }
+
+
+
 
 }
