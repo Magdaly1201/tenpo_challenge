@@ -31,7 +31,7 @@ public class SpringDependenciesBean {
 
     @Bean
     public PercentageService percentageService(){
-        return new PercentageService(percentageClient());
+        return new PercentageService(percentageClient(), historyService());
     }
 
     @Bean
@@ -43,8 +43,5 @@ public class SpringDependenciesBean {
     public SumEndpoints sumEndpoints() {
         return new SumEndpoints(sumService());
     }
-
-
-
 
 }
