@@ -11,7 +11,7 @@ public class SumEndpoints {
     }
 
     public float operationSumValuesAndPorcentage(int value1 , int value2){
-        return sumService.operationSumValuesAndPorcentage(value1,value2);
+        return sumService.operationSumValuesAndPercentage(value1,value2);
     }
 
 }
