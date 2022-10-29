@@ -19,12 +19,7 @@ public class PercentageClientImpl implements PercentageClient {
 
     @Override
     public Optional<Integer> getPercentage() {
-        try {
-            Integer[] percentage = restTemplate.getForObject("http://www.randomnumberapi.com/api/v1.0/random?min=" + MIN + "&max=" + MAX + "&count="+COUNT+"", Integer[].class);
-            return Arrays.stream(percentage).findFirst();
-        }catch (Exception ex){
-            System.out.println("ERROR");
-            throw new RuntimeException("Error in RetryExampleService.retryExample");
-        }
+        Integer[] percentage = restTemplate.getForObject("http://www.randomnumberapi.com/api/v1.0/random?min=" + MIN + "&max=" + MAX + "&count=" + COUNT + "", Integer[].class);
+        return Arrays.stream(percentage).findFirst();
     }
 }
