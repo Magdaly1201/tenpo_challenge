@@ -18,18 +18,17 @@ public class PercentageService {
     }
 
     @Retryable(value = RuntimeException.class, maxAttempts = 3,backoff = @Backoff(delay = 1000))
-    public float percentage(float value){
-        System.out.println("method called "+attempts++);
+    public float percentage(){
+        System.out.println("RETRY: method percentage client called "+attempts++);
         Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
         System.out.println("item service called");
-
-        return(percentage * value) / 100;
+        return percentage;
     }
 
     @Recover
     public float errorFallback(Exception e){
         attempts = 0;
-        System.out.println("ERROR: service is down");
+        System.out.println("ERROR: service percentage client is down retry: "+attempts);
         return historyService.getLastPercentage();
     }
 }
