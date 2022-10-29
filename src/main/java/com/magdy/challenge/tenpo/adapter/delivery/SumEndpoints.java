@@ -10,8 +10,8 @@ public class SumEndpoints {
         this.sumService = sumService;
     }
 
-    public float sum(int value1 , int value2){
-        return sumService.sum(value1,value2);
+    public float operationSumValuesAndPorcentage(int value1 , int value2){
+        return sumService.operationSumValuesAndPorcentage(value1,value2);
     }
 
 }

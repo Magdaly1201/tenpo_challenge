@@ -17,6 +17,6 @@ public class SumRestController {
 
     @GetMapping
     public float sum(int value1 , int value2){
-        return sumEndpoints.sum(value1,value2);
+        return sumEndpoints.operationSumValuesAndPorcentage(value1,value2);
     }
 }
