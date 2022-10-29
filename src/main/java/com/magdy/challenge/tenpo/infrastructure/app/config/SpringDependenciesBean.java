@@ -5,6 +5,7 @@ import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.SumService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,9 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableAutoConfiguration
 public class SpringDependenciesBean {
+
+    @Value("${random.integer.host}")
+    private String randomIntegerHost;
 
     @Bean
     public RestTemplate restTemplate(){
@@ -26,7 +30,7 @@ public class SpringDependenciesBean {
 
     @Bean
     public PercentageClientImpl percentageClient(){
-        return new PercentageClientImpl(restTemplate());
+        return new PercentageClientImpl(restTemplate(), randomIntegerHost);
     }
 
     @Bean

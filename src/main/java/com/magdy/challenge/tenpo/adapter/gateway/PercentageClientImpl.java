@@ -9,17 +9,16 @@ import java.util.Optional;
 public class PercentageClientImpl implements PercentageClient {
 
     private final RestTemplate restTemplate;
-    private final int MIN = 1;
-    private final int MAX = 100;
-    private final int COUNT = 0;
+    private final String randomIntegerHost;
 
-    public PercentageClientImpl(RestTemplate restTemplate) {
+    public PercentageClientImpl(RestTemplate restTemplate, String randomIntegerHost) {
         this.restTemplate = restTemplate;
+        this.randomIntegerHost = randomIntegerHost;
     }
 
     @Override
     public Optional<Integer> getPercentage() {
-        Integer[] percentage = restTemplate.getForObject("http://www.randomnumberapi.com/api/v1.0/random?min=" + MIN + "&max=" + MAX + "&count=" + COUNT + "", Integer[].class);
+        Integer[] percentage = restTemplate.getForObject(randomIntegerHost , Integer[].class);
         return Arrays.stream(percentage).findFirst();
     }
 }

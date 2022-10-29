@@ -7,6 +7,6 @@ class HistoryRepositoryImpl implements HistoryRepository {
 
     @Override
     public void createRegister() {
-         System.out.println("creacionde de registro");
+         System.out.println("creacion de de registro");
     }
 }
