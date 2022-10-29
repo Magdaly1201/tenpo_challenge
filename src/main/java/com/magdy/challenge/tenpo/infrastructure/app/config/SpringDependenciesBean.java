@@ -2,6 +2,7 @@ package com.magdy.challenge.tenpo.infrastructure.app.config;
 
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
+import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.SumService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,6 +17,11 @@ public class SpringDependenciesBean {
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
+    }
+
+    @Bean
+    public HistoryService historyService(){
+        return new HistoryService();
     }
 
     @Bean

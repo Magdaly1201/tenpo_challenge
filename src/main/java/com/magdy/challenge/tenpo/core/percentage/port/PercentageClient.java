@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface PercentageClient {
 
     @Cacheable(value = "PERCENTAGE")
-    Optional<Integer> getPercentage() throws IOException;
+    Optional<Integer> getPercentage();
 
 }
