@@ -1,5 +1,6 @@
 package com.magdy.challenge.tenpo.infrastructure.app.config;
 
+import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,6 +19,12 @@ public class CacheConfig {
 
     public static final String PERCENTAGE = "PERCENTAGE";
 
+    public  HistoryService historyService;
+
+    public CacheConfig(HistoryService historyServicet) {
+        this.historyService = historyService;
+    }
+
     @Bean
     public CacheManager cacheManager() {
         ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager(PERCENTAGE);
@@ -26,7 +33,6 @@ public class CacheConfig {
 
     @CacheEvict(allEntries = true, value = {PERCENTAGE})
     @Scheduled(fixedDelay = 30 * 60 * 1000, initialDelay = 60 * 1000)
-
     public void reportCacheEvict() {
         System.out.println("Flush Cache " + LocalDate.now());
     }
