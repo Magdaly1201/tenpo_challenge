@@ -1,38 +1,16 @@
-package com.magdy.challenge.tenpo.infrastructure.repository.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package com.magdy.challenge.tenpo.core.history.model;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "history")
-public class HistoryEntity {
+public class History {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
-
-    @Column(name = "type", nullable = false)
     private String type;
-
-    @Column(name = "payload")
     private String payload;
-
-    @Column(name = "user_request", nullable = false)
     private String userRequest;
-
-    @Column(name = "status", nullable = false)
     private String status;
 
-    public HistoryEntity(LocalDateTime dateTime, String type, String payload, String userRequest, String status) {
+    public History(LocalDateTime dateTime, String type, String payload, String userRequest, String status) {
         this.dateTime = dateTime;
         this.type = type;
         this.payload = payload;
@@ -54,6 +32,14 @@ public class HistoryEntity {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getPayload() {
@@ -78,13 +64,5 @@ public class HistoryEntity {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
