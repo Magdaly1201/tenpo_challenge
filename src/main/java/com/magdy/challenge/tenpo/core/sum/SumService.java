@@ -10,13 +10,13 @@ public class SumService {
         this.percentageService = percentageService;
     }
 
-    public float operationSumValuesAndPercentage(int value1 , int value2){
-        float sum = sum(value1,value2);
+    public float operationSumValuesAndPercentage(int value1, int value2) {
+        float sum = sum(value1, value2);
         float percentage = (percentageService.obtainPercentage() * sum) / 100;
-        return sum(sum,percentage);
+        return sum(sum, percentage);
     }
 
-    private float sum(float value1 , float value2){
+    private float sum(float value1, float value2) {
         return value1 + value2;
     }
 }

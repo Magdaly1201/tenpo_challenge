@@ -14,12 +14,12 @@ public class HistoryService {
         this.historyRepository = historyRepository;
     }
 
-    public void createTransaction(String type,String userRequest,String payload,String status) {
-        historyRepository.createTransaction(new HistoryEntity(LocalDateTime.now(),type,payload,userRequest,status));
+    public void createTransaction(String type, String userRequest, String payload, String status) {
+        historyRepository.createTransaction(new HistoryEntity(LocalDateTime.now(), type, payload, userRequest, status));
     }
 
     @Cacheable(value = "HISTORY_PERCENTAGE")
-    public float getLastPercentage(){
+    public float getLastPercentage() {
         //TODO add query to the history
         return historyRepository.getLastPercentage();
     }

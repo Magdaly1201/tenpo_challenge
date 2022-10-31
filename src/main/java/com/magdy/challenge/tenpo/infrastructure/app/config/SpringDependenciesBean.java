@@ -27,32 +27,32 @@ public class SpringDependenciesBean {
     }
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
     @Bean
-    public HistoryAdapterRepository historyRepository(){
+    public HistoryAdapterRepository historyRepository() {
         return new HistoryAdapterRepository(historyDao);
     }
 
     @Bean
-    public HistoryService historyService(){
+    public HistoryService historyService() {
         return new HistoryService(historyRepository());
     }
 
     @Bean
-    public PercentageClientImpl percentageClient(){
+    public PercentageClientImpl percentageClient() {
         return new PercentageClientImpl(restTemplate(), randomIntegerHost);
     }
 
     @Bean
-    public PercentageService percentageService(){
+    public PercentageService percentageService() {
         return new PercentageService(percentageClient(), historyService());
     }
 
     @Bean
-    public SumService sumService(){
+    public SumService sumService() {
         return new SumService(percentageService());
     }
 

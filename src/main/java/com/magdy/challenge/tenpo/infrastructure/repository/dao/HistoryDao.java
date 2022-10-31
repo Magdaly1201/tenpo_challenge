@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface HistoryDao  extends JpaRepository<HistoryEntity, Long> {
+public interface HistoryDao extends JpaRepository<HistoryEntity, Long> {
 
     Optional<HistoryEntity> findFirstByStatusAndTypeOrderByDateTimeDesc(String status, String type);
 }

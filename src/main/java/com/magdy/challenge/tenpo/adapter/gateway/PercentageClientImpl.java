@@ -18,7 +18,7 @@ public class PercentageClientImpl implements PercentageClient {
 
     @Override
     public Optional<Integer> getPercentage() {
-        Integer[] percentage = restTemplate.getForObject(randomIntegerHost , Integer[].class);
+        Integer[] percentage = restTemplate.getForObject(randomIntegerHost, Integer[].class);
         return Arrays.stream(percentage).findFirst();
     }
 }

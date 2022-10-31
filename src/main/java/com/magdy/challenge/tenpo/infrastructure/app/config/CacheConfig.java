@@ -18,8 +18,8 @@ import java.time.LocalDate;
 public class CacheConfig {
 
     public static final String PERCENTAGE = "PERCENTAGE";
-    public static final String HISTORY_PERCENTAGE ="HISTORY_PERCENTAGE";
-    public  HistoryService historyService;
+    public static final String HISTORY_PERCENTAGE = "HISTORY_PERCENTAGE";
+    public HistoryService historyService;
 
     public CacheConfig(HistoryService historyServicet) {
         this.historyService = historyService;
@@ -27,11 +27,11 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager(PERCENTAGE,HISTORY_PERCENTAGE);
+        ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager(PERCENTAGE, HISTORY_PERCENTAGE);
         return cacheManager;
     }
 
-    @CacheEvict(allEntries = true, value = {PERCENTAGE,HISTORY_PERCENTAGE})
+    @CacheEvict(allEntries = true, value = {PERCENTAGE, HISTORY_PERCENTAGE})
     @Scheduled(fixedDelay = 30 * 60 * 1000, initialDelay = 60 * 1000)
     public void reportCacheEvict() {
         System.out.println("Flush Cache " + LocalDate.now());

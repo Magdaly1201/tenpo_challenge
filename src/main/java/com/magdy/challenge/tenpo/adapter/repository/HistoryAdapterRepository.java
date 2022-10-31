@@ -14,12 +14,12 @@ public class HistoryAdapterRepository implements HistoryRepository {
 
     @Override
     public void createTransaction(HistoryEntity historyEntity) {
-         historyDao.save(historyEntity);
+        historyDao.save(historyEntity);
     }
 
     @Override
     public float getLastPercentage() {
-        String percentage = historyDao.findFirstByStatusAndTypeOrderByDateTimeDesc("OK","percentage").orElseThrow(()-> new RuntimeException("error obteniendo percentage")).getPayload();
-        return Float.parseFloat(percentage) ;
+        String percentage = historyDao.findFirstByStatusAndTypeOrderByDateTimeDesc("OK", "percentage").orElseThrow(() -> new RuntimeException("error obteniendo percentage")).getPayload();
+        return Float.parseFloat(percentage);
     }
 }

@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("com.magdy.challenge.tenpo.infrastructure.repository")
 public class TenpoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TenpoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TenpoApplication.class, args);
+    }
 
 }
