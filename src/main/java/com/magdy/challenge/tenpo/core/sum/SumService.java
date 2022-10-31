@@ -12,7 +12,7 @@ public class SumService {
 
     public float operationSumValuesAndPercentage(int value1 , int value2){
         float sum = sum(value1,value2);
-        float percentage = (percentageService.percentage() * sum) / 100;
+        float percentage = (percentageService.obtainPercentage() * sum) / 100;
         return sum(sum,percentage);
     }
 
