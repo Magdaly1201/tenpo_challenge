@@ -2,9 +2,11 @@ package com.magdy.challenge.tenpo.infrastructure.app.config;
 
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
+import com.magdy.challenge.tenpo.adapter.repository.HistoryAdapterRepository;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.SumService;
+import com.magdy.challenge.tenpo.infrastructure.repository.dao.HistoryDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +17,14 @@ import org.springframework.web.client.RestTemplate;
 @EnableAutoConfiguration
 public class SpringDependenciesBean {
 
+    private final HistoryDao historyDao;
+
     @Value("${random.integer.host}")
     private String randomIntegerHost;
+
+    public SpringDependenciesBean(HistoryDao historyDao) {
+        this.historyDao = historyDao;
+    }
 
     @Bean
     public RestTemplate restTemplate(){
@@ -24,8 +32,13 @@ public class SpringDependenciesBean {
     }
 
     @Bean
+    public HistoryAdapterRepository historyRepository(){
+        return new HistoryAdapterRepository(historyDao);
+    }
+
+    @Bean
     public HistoryService historyService(){
-        return new HistoryService();
+        return new HistoryService(historyRepository());
     }
 
     @Bean
