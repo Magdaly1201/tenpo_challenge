@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface HistoryDao  extends JpaRepository<HistoryEntity, Long> {
 
-    Optional<HistoryEntity> findOneByStatusAndTypeOrderByIdDesc(String status, String type);
+    Optional<HistoryEntity> findFirstByStatusAndTypeOrderByDateTimeDesc(String status, String type);
 }

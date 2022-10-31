@@ -19,7 +19,7 @@ public class HistoryAdapterRepository implements HistoryRepository {
 
     @Override
     public float getLastPercentage() {
-        String percentage = historyDao.findOneByStatusAndTypeOrderByIdDesc("OK","percentage").orElseThrow(()-> new RuntimeException("error obteniendo percentage")).getPayload();
+        String percentage = historyDao.findFirstByStatusAndTypeOrderByDateTimeDesc("OK","percentage").orElseThrow(()-> new RuntimeException("error obteniendo percentage")).getPayload();
         return Float.parseFloat(percentage) ;
     }
 }
