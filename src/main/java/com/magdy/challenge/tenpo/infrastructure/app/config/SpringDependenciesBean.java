@@ -108,7 +108,7 @@ public class SpringDependenciesBean {
 
     @Bean
     public SumService sumService() {
-        return new SumService(percentageService());
+        return new SumService(percentageService(), messageService());
     }
 
     @Bean

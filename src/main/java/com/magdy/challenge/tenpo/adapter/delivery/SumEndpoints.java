@@ -1,5 +1,6 @@
 package com.magdy.challenge.tenpo.adapter.delivery;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magdy.challenge.tenpo.core.history.model.History;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.sum.service.SumService;
@@ -16,7 +17,7 @@ public class SumEndpoints {
         this.historyService = historyService;
     }
 
-    public Sum operationSumValuesAndPercentage(int value1, int value2) {
+    public Sum operationSumValuesAndPercentage(int value1, int value2) throws JsonProcessingException {
         return sumService.operationSumValuesAndPercentage(value1, value2);
     }
 

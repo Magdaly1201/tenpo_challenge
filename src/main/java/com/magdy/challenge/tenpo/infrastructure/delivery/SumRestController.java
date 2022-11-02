@@ -1,5 +1,6 @@
 package com.magdy.challenge.tenpo.infrastructure.delivery;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.HistoryDTO;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.SumResponseDTO;
@@ -24,7 +25,7 @@ public class SumRestController {
     }
 
     @PostMapping
-    public SumResponseDTO sum(@RequestParam(value = "value1", required = true) int value1, @RequestParam(value = "value2", required = true) int value2) {
+    public SumResponseDTO sum(@RequestParam(value = "value1", required = true) int value1, @RequestParam(value = "value2", required = true) int value2) throws JsonProcessingException {
         return modelMapper.map(sumEndpoints.operationSumValuesAndPercentage(value1, value2),SumResponseDTO.class);
     }
 

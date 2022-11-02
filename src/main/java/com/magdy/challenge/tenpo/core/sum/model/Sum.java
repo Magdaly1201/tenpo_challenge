@@ -1,5 +1,9 @@
 package com.magdy.challenge.tenpo.core.sum.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 public class Sum {
 
     private final int value1;
@@ -56,5 +60,23 @@ public class Sum {
 
     public float getPercentageValue() {
         return percentageValue;
+    }
+
+    @Override
+    public String toString() {
+        return "Sum{" +
+                "value1=" + value1 +
+                ", value2=" + value2 +
+                ", sum=" + sum +
+                ", percentageSum=" + percentageSum +
+                ", percentageValue=" + percentageValue +
+                ", total=" + total +
+                '}';
+    }
+
+    public String json() throws JsonProcessingException {
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String response = ow.writeValueAsString(this);
+        return response;
     }
 }
