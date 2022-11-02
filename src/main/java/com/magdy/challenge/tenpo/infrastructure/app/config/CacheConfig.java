@@ -1,6 +1,5 @@
 package com.magdy.challenge.tenpo.infrastructure.app.config;
 
-import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.EnableCaching;
@@ -19,11 +18,6 @@ public class CacheConfig {
 
     public static final String PERCENTAGE = "PERCENTAGE";
     public static final String HISTORY_PERCENTAGE = "HISTORY_PERCENTAGE";
-    public HistoryService historyService;
-
-    public CacheConfig(HistoryService historyServicet) {
-        this.historyService = historyService;
-    }
 
     @Bean
     public CacheManager cacheManager() {
