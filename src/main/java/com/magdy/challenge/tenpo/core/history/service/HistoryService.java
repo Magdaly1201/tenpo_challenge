@@ -20,7 +20,6 @@ public class HistoryService {
 
     @Cacheable(value = "HISTORY_PERCENTAGE")
     public float getLastPercentage() {
-        //TODO add query to the history
         return historyRepository.getLastPercentage();
     }
 }

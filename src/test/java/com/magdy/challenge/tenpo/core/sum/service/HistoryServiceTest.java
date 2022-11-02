@@ -1,6 +1,7 @@
 package com.magdy.challenge.tenpo.core.sum.service;
 
-import com.magdy.challenge.tenpo.core.sum.port.HistoryRepository;
+import com.magdy.challenge.tenpo.core.history.port.HistoryRepository;
+import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
