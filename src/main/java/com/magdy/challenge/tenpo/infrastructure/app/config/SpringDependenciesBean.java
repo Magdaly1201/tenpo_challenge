@@ -7,6 +7,7 @@ import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.SumService;
 import com.magdy.challenge.tenpo.infrastructure.repository.dao.HistoryDao;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -32,8 +33,13 @@ public class SpringDependenciesBean {
     }
 
     @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
+
+    @Bean
     public HistoryAdapterRepository historyRepository() {
-        return new HistoryAdapterRepository(historyDao);
+        return new HistoryAdapterRepository(historyDao, modelMapper());
     }
 
     @Bean
@@ -58,7 +64,7 @@ public class SpringDependenciesBean {
 
     @Bean
     public SumEndpoints sumEndpoints() {
-        return new SumEndpoints(sumService());
+        return new SumEndpoints(sumService(), historyService());
     }
 
 }

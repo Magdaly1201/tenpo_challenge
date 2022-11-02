@@ -1,25 +1,20 @@
-package com.magdy.challenge.tenpo.core.history.model;
+package com.magdy.challenge.tenpo.infrastructure.delivery.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
-public class History {
+public class HistoryDTO {
 
     private Long id;
+    
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime;
     private String type;
     private String payload;
     private String userRequest;
     private String status;
 
-    public History(LocalDateTime dateTime, String type, String payload, String userRequest, String status) {
-        this.dateTime = dateTime;
-        this.type = type;
-        this.payload = payload;
-        this.userRequest = userRequest;
-        this.status = status;
-    }
-
-    public History() {
-    }
 
     public Long getId() {
         return id;

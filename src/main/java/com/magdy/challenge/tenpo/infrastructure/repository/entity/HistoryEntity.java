@@ -32,14 +32,6 @@ public class HistoryEntity {
     @Column(name = "status", nullable = false)
     private String status;
 
-    public HistoryEntity(LocalDateTime dateTime, String type, String payload, String userRequest, String status) {
-        this.dateTime = dateTime;
-        this.type = type;
-        this.payload = payload;
-        this.userRequest = userRequest;
-        this.status = status;
-    }
-
     public Long getId() {
         return id;
     }
