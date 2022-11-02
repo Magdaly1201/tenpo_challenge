@@ -2,7 +2,6 @@ package com.magdy.challenge.tenpo.core.history.service;
 
 import com.magdy.challenge.tenpo.core.history.model.History;
 import com.magdy.challenge.tenpo.core.history.port.HistoryRepository;
-import com.magdy.challenge.tenpo.infrastructure.repository.entity.HistoryEntity;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 
