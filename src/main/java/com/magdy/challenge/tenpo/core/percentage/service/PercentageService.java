@@ -1,6 +1,7 @@
 package com.magdy.challenge.tenpo.core.percentage.service;
 
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
+import com.magdy.challenge.tenpo.core.message.service.MessageService;
 import com.magdy.challenge.tenpo.core.percentage.port.PercentageClient;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.retry.annotation.Backoff;
@@ -11,11 +12,13 @@ public class PercentageService {
 
     private final PercentageClient percentageClient;
     private final HistoryService historyService;
+    private final MessageService messageService;
 
     private int attempts;
 
-    public PercentageService(PercentageClient percentageClient, HistoryService historyService) {
+    public PercentageService(PercentageClient percentageClient, HistoryService historyService, MessageService messageService) {
         this.percentageClient = percentageClient;
+        this.messageService = messageService;
         this.historyService = historyService;
     }
 
@@ -24,7 +27,7 @@ public class PercentageService {
     public float obtainPercentage() {
         System.out.println("RETRY: method percentage client called " + attempts++);
         Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
-        historyService.createTransaction("percentage", "magdaly", percentage.toString(), "OK");
+        messageService.createMessage("percentage", "magdaly", percentage.toString(), "OK");
         System.out.println("item service called");
         return percentage;
     }
