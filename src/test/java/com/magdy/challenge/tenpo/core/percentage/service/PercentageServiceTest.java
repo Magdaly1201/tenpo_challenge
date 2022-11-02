@@ -1,6 +1,6 @@
 package com.magdy.challenge.tenpo.core.percentage.service;
 
-import com.magdy.challenge.tenpo.core.history.service.HistoryService;
+import com.magdy.challenge.tenpo.core.sum.HistoryService;
 import com.magdy.challenge.tenpo.core.percentage.port.PercentageClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
