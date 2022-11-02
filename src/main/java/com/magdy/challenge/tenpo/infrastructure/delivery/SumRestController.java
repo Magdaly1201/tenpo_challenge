@@ -2,6 +2,7 @@ package com.magdy.challenge.tenpo.infrastructure.delivery;
 
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.HistoryDTO;
+import com.magdy.challenge.tenpo.infrastructure.delivery.dto.SumResponseDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ public class SumRestController {
     }
 
     @PostMapping
-    public float sum(@RequestParam(value = "value1", required = true) int value1, @RequestParam(value = "value2", required = true) int value2) {
-        return sumEndpoints.operationSumValuesAndPercentage(value1, value2);
+    public SumResponseDTO sum(@RequestParam(value = "value1", required = true) int value1, @RequestParam(value = "value2", required = true) int value2) {
+        return modelMapper.map(sumEndpoints.operationSumValuesAndPercentage(value1, value2),SumResponseDTO.class);
     }
 
     @GetMapping("/history")

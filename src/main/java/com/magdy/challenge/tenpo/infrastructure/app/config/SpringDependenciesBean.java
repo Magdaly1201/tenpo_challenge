@@ -9,7 +9,7 @@ import com.magdy.challenge.tenpo.adapter.repository.KafkaAdapter;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.message.service.MessageService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
-import com.magdy.challenge.tenpo.core.sum.SumService;
+import com.magdy.challenge.tenpo.core.sum.service.SumService;
 import com.magdy.challenge.tenpo.infrastructure.repository.dao.HistoryDao;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

@@ -1,6 +1,7 @@
-package com.magdy.challenge.tenpo.core.sum;
+package com.magdy.challenge.tenpo.core.sum.service;
 
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
+import com.magdy.challenge.tenpo.core.sum.model.Sum;
 
 public class SumService {
 
@@ -10,10 +11,8 @@ public class SumService {
         this.percentageService = percentageService;
     }
 
-    public float operationSumValuesAndPercentage(int value1, int value2) {
-        float sum = sum(value1, value2);
-        float percentage = (percentageService.obtainPercentage() * sum) / 100;
-        return sum(sum, percentage);
+    public Sum operationSumValuesAndPercentage(int value1, int value2) {
+        return new Sum(value1,value2,percentageService.obtainPercentage());
     }
 
     private float sum(float value1, float value2) {

@@ -36,7 +36,7 @@ public class PercentageService {
     public float errorFallback(Exception e) {
         attempts = 0;
         System.out.println("ERROR: service percentage client is down retry: " + attempts);
-        historyService.createTransaction("percentage", "magdaly", "error message", "ERROR");
+        messageService.createMessage("percentage", "magdaly", "error message", "ERROR");
         return historyService.getLastPercentage();
     }
 }

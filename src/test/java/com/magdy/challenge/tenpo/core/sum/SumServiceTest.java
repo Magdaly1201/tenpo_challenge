@@ -1,6 +1,8 @@
 package com.magdy.challenge.tenpo.core.sum;
 
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
+import com.magdy.challenge.tenpo.core.sum.service.SumService;
+import com.magdy.challenge.tenpo.core.sum.model.Sum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +31,7 @@ class SumServiceTest {
 
         when(percentageService.obtainPercentage()).thenReturn(10F);
 
-        float results = sumService.operationSumValuesAndPercentage(value1, value2);
+        Sum results = sumService.operationSumValuesAndPercentage(value1, value2);
 
         assertEquals(11, results);
         assertNotEquals(2, results);
