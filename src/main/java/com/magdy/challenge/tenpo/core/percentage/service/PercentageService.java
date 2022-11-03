@@ -11,6 +11,8 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 
+import static com.magdy.challenge.tenpo.infrastructure.app.config.CacheConfig.PERCENTAGE;
+
 public class PercentageService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -27,7 +29,7 @@ public class PercentageService {
     }
 
     @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 1000))
-    @Cacheable(value = "PERCENTAGE")
+    @Cacheable(value = PERCENTAGE)
     public float obtainPercentage() {
         logger.info("RETRY: method percentage client called " + attempts++);
         Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
