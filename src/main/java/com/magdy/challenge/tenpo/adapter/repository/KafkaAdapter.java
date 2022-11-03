@@ -1,7 +1,5 @@
 package com.magdy.challenge.tenpo.adapter.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.magdy.challenge.tenpo.core.history.model.History;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
@@ -34,7 +32,7 @@ public class KafkaAdapter implements MessageRepository {
     @Override
     @KafkaListener(topics="history-events")
     public void consumeMessage(String message) {
-        logger.info("#### -> Consumed message -> %s%n", message);
+        logger.info("Consumed message -> "+message);
         historyService.createTransaction(gson.fromJson(message,History.class));
     }
 }
