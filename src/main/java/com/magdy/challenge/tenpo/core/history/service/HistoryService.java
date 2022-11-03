@@ -15,8 +15,8 @@ public class HistoryService {
         this.historyRepository = historyRepository;
     }
 
-    public void createTransaction(String type, String userRequest, String payload, String status) {
-        historyRepository.createTransaction(new History(LocalDateTime.now(), type, payload, userRequest, status));
+    public void createTransaction(History history) {
+        historyRepository.createTransaction(history);
     }
 
     @Cacheable(value = "HISTORY_PERCENTAGE")

@@ -2,6 +2,7 @@ package com.magdy.challenge.tenpo.infrastructure.app.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
 import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
 import com.magdy.challenge.tenpo.adapter.repository.HistoryAdapterRepository;
@@ -48,8 +49,8 @@ public class SpringDependenciesBean {
 
     @Bean
     @Primary
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    public Gson gson() {
+        return new Gson();
     }
 
     @Bean
@@ -93,12 +94,12 @@ public class SpringDependenciesBean {
 
     @Bean
     public KafkaAdapter messageRepository() {
-        return new KafkaAdapter(objectMapper(), kafkaTemplate(), TOPIC);
+        return new KafkaAdapter(gson(), kafkaTemplate(), TOPIC, historyService());
     }
 
     @Bean
     public MessageService messageService() {
-        return new MessageService(messageRepository());
+        return new MessageService(messageRepository(), historyRepository());
     }
 
     @Bean

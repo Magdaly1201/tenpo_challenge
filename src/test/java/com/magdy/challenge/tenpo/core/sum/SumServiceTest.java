@@ -1,5 +1,6 @@
 package com.magdy.challenge.tenpo.core.sum;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.service.SumService;
 import com.magdy.challenge.tenpo.core.sum.model.Sum;
@@ -25,7 +26,7 @@ class SumServiceTest {
 
     @Test
     @DisplayName("operacion de Suma de valores y porcentaje")
-    void operationSumValuesAndPercentage() {
+    void operationSumValuesAndPercentage() throws JsonProcessingException {
         int value1 = 5;
         int value2 = 5;
 
@@ -33,8 +34,8 @@ class SumServiceTest {
 
         Sum results = sumService.operationSumValuesAndPercentage(value1, value2);
 
-        assertEquals(11, results);
-        assertNotEquals(2, results);
+        assertEquals(11, results.getSum());
+        assertNotEquals(2, results.getPercentageSum());
     }
 
 }

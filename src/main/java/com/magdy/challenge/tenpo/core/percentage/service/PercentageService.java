@@ -2,7 +2,6 @@ package com.magdy.challenge.tenpo.core.percentage.service;
 
 import com.magdy.challenge.tenpo.core.history.model.Status;
 import com.magdy.challenge.tenpo.core.history.model.TypeTransaction;
-import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.message.service.MessageService;
 import com.magdy.challenge.tenpo.core.percentage.port.PercentageClient;
 import org.slf4j.Logger;
@@ -16,12 +15,12 @@ public class PercentageService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final PercentageClient percentageClient;
-    private final HistoryService historyService;
+    private final com.magdy.challenge.tenpo.core.history.service.HistoryService historyService;
     private final MessageService messageService;
 
     private int attempts;
 
-    public PercentageService(PercentageClient percentageClient, HistoryService historyService, MessageService messageService) {
+    public PercentageService(PercentageClient percentageClient, com.magdy.challenge.tenpo.core.history.service.HistoryService historyService, MessageService messageService) {
         this.percentageClient = percentageClient;
         this.messageService = messageService;
         this.historyService = historyService;
@@ -32,7 +31,7 @@ public class PercentageService {
     public float obtainPercentage() {
         logger.info("RETRY: method percentage client called " + attempts++);
         Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
-        messageService.createMessage(TypeTransaction.PERCENTAGE.toString(), "magdaly", percentage.toString(), Status.OK.toString());
+        messageService.createMessage(TypeTransaction.PERCENTAGE, "magdaly", percentage.toString(), Status.OK);
         logger.info("service called");
         return percentage;
     }
@@ -41,7 +40,7 @@ public class PercentageService {
     public float errorFallback(Exception e) {
         attempts = 0;
         logger.error("ERROR: service percentage client is down retry: " + attempts);
-        messageService.createMessage(TypeTransaction.PERCENTAGE.toString(), "magdaly", "error message", Status.ERROR.toString());
+        messageService.createMessage(TypeTransaction.PERCENTAGE, "magdaly", "service percentage client is down retry:" + attempts, Status.ERROR);
         return historyService.getLastPercentage();
     }
 }

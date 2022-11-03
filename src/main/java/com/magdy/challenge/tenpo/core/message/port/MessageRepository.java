@@ -5,4 +5,6 @@ import com.magdy.challenge.tenpo.core.history.model.History;
 public interface MessageRepository {
 
     void createdMessage(History history);
+
+    void consumeMessage(String message);
 }
