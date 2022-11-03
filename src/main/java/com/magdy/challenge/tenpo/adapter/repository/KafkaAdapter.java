@@ -23,6 +23,7 @@ public class KafkaAdapter implements MessageRepository {
         try {
             kafkaTemplate.send(TOPIC, objectMapper.writeValueAsString(history));
         } catch (JsonProcessingException e) {
+            //TODO: Add exception
             e.printStackTrace();
         }
     }

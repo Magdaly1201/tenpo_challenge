@@ -1,6 +1,7 @@
 package com.magdy.challenge.tenpo.core.history.model;
 
-public enum Status {
-    OK,
-    ERROR
+public class Status {
+
+    public static final String OK = "OK";
+    public static final String ERROR = "ERROR";
 }
