@@ -5,7 +5,7 @@ import com.magdy.challenge.tenpo.core.history.port.HistoryRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDateTime;
+import static com.magdy.challenge.tenpo.infrastructure.app.config.CacheConfig.HISTORY_PERCENTAGE;
 
 public class HistoryService {
 
@@ -19,7 +19,7 @@ public class HistoryService {
         historyRepository.createTransaction(history);
     }
 
-    @Cacheable(value = "HISTORY_PERCENTAGE")
+    @Cacheable(value = HISTORY_PERCENTAGE)
     public float getLastPercentage() {
         return historyRepository.getLastPercentage();
     }
