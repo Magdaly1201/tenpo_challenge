@@ -36,7 +36,7 @@ public class CacheConfig {
     }
 
     @CacheEvict(allEntries = true, value = {PERCENTAGE, HISTORY_PERCENTAGE})
-    @Scheduled(fixedDelay = 30 * 60 * 1000, initialDelay = 60 * 1000)
+    @Scheduled(fixedDelay = 30 * 60 * 100000, initialDelay = 60 * 100000)
     public void reportCacheEvict() {
         messageService.createMessage(TypeTransaction.FLUS_CACHE,"cron",null, Status.OK);
         logger.info("Flush Cache " + LocalDate.now());
