@@ -26,8 +26,8 @@ public class HistoryEntity {
     @Column(name = "payload")
     private String payload;
 
-    @Column(name = "user_request", nullable = false)
-    private String userRequest;
+    @Column(name = "userId")
+    private Long userId;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -56,12 +56,12 @@ public class HistoryEntity {
         this.payload = payload;
     }
 
-    public String getUserRequest() {
-        return userRequest;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserRequest(String userRequest) {
-        this.userRequest = userRequest;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getStatus() {

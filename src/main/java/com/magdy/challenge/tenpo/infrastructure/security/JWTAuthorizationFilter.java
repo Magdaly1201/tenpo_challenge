@@ -1,7 +1,11 @@
 package com.magdy.challenge.tenpo.infrastructure.security;
 
+import com.magdy.challenge.tenpo.infrastructure.exceptions.ErrorValidationJWTException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +31,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         try {
             if (existJWTToken(request, response)) {
                 Claims claims = validateToken(request);
-                request.setAttribute("id", Long.valueOf(claims.getSubject()));
+                request.setAttribute("userId", Long.valueOf(claims.getSubject()));
                 if (claims.get("authorities") != null) {
                     setUpSpringAuthentication(claims);
                 } else {
@@ -37,11 +41,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.clearContext();
             }
             chain.doFilter(request, response);
-        } catch (Exception exception) {
-//        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, exception.getMessage());
-            return;
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
+            throw new ErrorValidationJWTException(e.getMessage());
         }
     }
 

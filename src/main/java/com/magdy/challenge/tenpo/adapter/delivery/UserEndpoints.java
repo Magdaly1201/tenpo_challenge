@@ -14,10 +14,11 @@ public class UserEndpoints {
     }
 
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
+        userService.existUserByEmail(userRequestDTO.getEmail());
         return userService.create(userRequestDTO);
     }
 
-    public UserDataResponseLogin login(String name, String password) {
-        return userService.login(name, password);
+    public UserDataResponseLogin login(String email, String password) {
+        return userService.login(email, password);
     }
 }

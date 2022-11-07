@@ -1,21 +1,23 @@
 package com.magdy.challenge.tenpo.infrastructure.delivery.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class LoginRequest {
 
     @NotEmpty(message = "no puede ser vacio.")
-    private String name;
+    @Email
+    private String email;
 
     @NotEmpty(message = "no puede ser vacio.")
     private String password;
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

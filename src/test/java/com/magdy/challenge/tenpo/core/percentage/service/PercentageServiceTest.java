@@ -31,10 +31,10 @@ class PercentageServiceTest {
     @DisplayName("obtener porcentaje")
     void percentage() {
         Integer percentage = 10;
-
+        Long userId = 10L;
         when(percentageClient.getPercentage()).thenReturn(Optional.of(percentage));
 
-        float results = percentageService.obtainPercentage();
+        float results = percentageService.obtainPercentage(userId);
 
         assertEquals(10, results);
         verify(percentageClient).getPercentage();

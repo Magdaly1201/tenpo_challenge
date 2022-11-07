@@ -1,4 +1,5 @@
 package com.magdy.challenge.tenpo.core.history.model;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -14,14 +15,14 @@ public class History {
     private LocalDateTime dateTime;
     private String type;
     private String payload;
-    private String userRequest;
+    private Long userId;
     private String status;
 
-    public History(LocalDateTime dateTime, String type, String payload, String userRequest, String status) {
+    public History(LocalDateTime dateTime, String type, String payload, Long userId, String status) {
         this.dateTime = dateTime;
         this.type = type;
         this.payload = payload;
-        this.userRequest = userRequest;
+        this.userId = userId;
         this.status = status;
     }
 
@@ -60,12 +61,12 @@ public class History {
         this.payload = payload;
     }
 
-    public String getUserRequest() {
-        return userRequest;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserRequest(String userRequest) {
-        this.userRequest = userRequest;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getStatus() {

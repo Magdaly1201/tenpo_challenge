@@ -4,6 +4,8 @@ import com.magdy.challenge.tenpo.core.user.service.port.UserRepository;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.UserDataResponseLogin;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.UserRequestDTO;
 import com.magdy.challenge.tenpo.infrastructure.delivery.dto.UserResponseDTO;
+import com.magdy.challenge.tenpo.infrastructure.exceptions.UserAlreadyExist;
+import com.magdy.challenge.tenpo.infrastructure.exceptions.UserNotFoundException;
 import com.magdy.challenge.tenpo.infrastructure.repository.entity.UserEntity;
 import com.magdy.challenge.tenpo.infrastructure.security.GeneratorJWT;
 import com.magdy.challenge.tenpo.infrastructure.security.model.UserJWT;
@@ -21,12 +23,22 @@ public class UserService {
     }
 
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
-        UserEntity userEntity = new UserEntity(userRequestDTO.getName(), userRequestDTO.getEmail(), userRequestDTO.getPassword(), LocalDateTime.now(), null, true,"ROLE_USER");
+        UserEntity userEntity = new UserEntity(userRequestDTO.getName(), userRequestDTO.getEmail(), userRequestDTO.getPassword(), LocalDateTime.now(), null, true, "ROLE_USER");
         return this.userRepository.save(userEntity);
     }
 
     public UserDataResponseLogin login(String email, String password) {
         UserResponseDTO user = this.userRepository.findUserByEmailAndPassword(email, password);
         return new UserDataResponseLogin(generatorJWT.getJWTToken(new UserJWT(user.getId(), user.getRoleId())));
+    }
+
+    public void existUserByEmail(String email) {
+        try {
+            UserResponseDTO userEntity = userRepository.findByEmail(email);
+            if (userEntity != null) {
+                throw new UserAlreadyExist();
+            }
+        } catch (UserNotFoundException e) {
+        }
     }
 }

@@ -22,10 +22,9 @@ import java.time.LocalDate;
 @EnableScheduling
 public class CacheConfig {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String PERCENTAGE = "PERCENTAGE";
     public static final String HISTORY_PERCENTAGE = "HISTORY_PERCENTAGE";
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     public MessageService messageService;
 
@@ -38,7 +37,7 @@ public class CacheConfig {
     @CacheEvict(allEntries = true, value = {PERCENTAGE, HISTORY_PERCENTAGE})
     @Scheduled(fixedDelay = 30 * 60 * 100000, initialDelay = 60 * 100000)
     public void reportCacheEvict() {
-        messageService.createMessage(TypeTransaction.FLUS_CACHE,"cron",null, Status.OK);
+        messageService.createMessage(TypeTransaction.FLUS_CACHE, null, "FLUSH - CRON ", Status.OK);
         logger.info("Flush Cache " + LocalDate.now());
     }
 }

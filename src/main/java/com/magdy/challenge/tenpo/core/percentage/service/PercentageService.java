@@ -30,10 +30,10 @@ public class PercentageService {
 
     @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 1000))
     @Cacheable(value = PERCENTAGE)
-    public float obtainPercentage() {
+    public float obtainPercentage(Long userId) {
         logger.info("RETRY: method percentage client called " + attempts++);
         Integer percentage = percentageClient.getPercentage().orElseThrow(() -> new RuntimeException("ERROR: not value for percentage"));
-        messageService.createMessage(TypeTransaction.PERCENTAGE, "magdaly", percentage.toString(), Status.OK);
+        messageService.createMessage(TypeTransaction.PERCENTAGE, userId, percentage.toString(), Status.OK);
         logger.info("service called");
         return percentage;
     }
@@ -42,7 +42,7 @@ public class PercentageService {
     public float errorFallback(Exception e) {
         attempts = 0;
         logger.error("ERROR: service percentage client is down retry: " + attempts);
-        messageService.createMessage(TypeTransaction.PERCENTAGE, "magdaly", "service percentage client is down retry:" + attempts, Status.ERROR);
+        messageService.createMessage(TypeTransaction.PERCENTAGE, null, "service percentage client is down retry:" + attempts, Status.ERROR);
         return historyService.getLastPercentage();
     }
 }

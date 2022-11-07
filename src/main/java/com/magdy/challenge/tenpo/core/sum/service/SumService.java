@@ -18,9 +18,9 @@ public class SumService {
         this.messageService = messageService;
     }
 
-    public Sum operationSumValuesAndPercentage(int value1, int value2) throws JsonProcessingException {
-        Sum sumResponseDTO = new Sum(value1,value2,percentageService.obtainPercentage());
-        this.messageService.createMessage(TypeTransaction.OPERATION,"magdaly",sumResponseDTO.json(), Status.OK);
+    public Sum operationSumValuesAndPercentage(int value1, int value2, Long userId) throws JsonProcessingException {
+        Sum sumResponseDTO = new Sum(value1, value2, percentageService.obtainPercentage(userId));
+        this.messageService.createMessage(TypeTransaction.OPERATION, userId, sumResponseDTO.json(), Status.OK);
         return sumResponseDTO;
     }
 }

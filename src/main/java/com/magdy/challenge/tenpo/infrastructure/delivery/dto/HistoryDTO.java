@@ -7,12 +7,11 @@ import java.time.LocalDateTime;
 public class HistoryDTO {
 
     private Long id;
-    
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime;
     private String type;
     private String payload;
-    private String userRequest;
+    private Long userId;
     private String status;
 
 
@@ -48,12 +47,12 @@ public class HistoryDTO {
         this.payload = payload;
     }
 
-    public String getUserRequest() {
-        return userRequest;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserRequest(String userRequest) {
-        this.userRequest = userRequest;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getStatus() {

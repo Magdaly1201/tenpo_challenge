@@ -7,6 +7,8 @@ public interface UserRepository {
 
     UserResponseDTO save(UserEntity user);
 
-    UserResponseDTO findUserByEmailAndPassword(String username, String password);
+    UserResponseDTO findUserByEmailAndPassword(String email, String password);
+
+    UserResponseDTO findByEmail(String email);
 
 }

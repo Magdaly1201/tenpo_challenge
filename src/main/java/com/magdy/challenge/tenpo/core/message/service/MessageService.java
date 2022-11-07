@@ -14,7 +14,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public void createMessage(String type, String userRequest, String payload, String status){
-        messageRepository.createdMessage(new History(LocalDateTime.now(), type, payload, userRequest, status));
+    public void createMessage(String type, Long userId, String payload, String status) {
+        messageRepository.createdMessage(new History(LocalDateTime.now(), type, payload, userId, status));
     }
 }
