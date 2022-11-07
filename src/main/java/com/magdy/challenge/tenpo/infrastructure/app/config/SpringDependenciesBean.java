@@ -1,17 +1,20 @@
 package com.magdy.challenge.tenpo.infrastructure.app.config;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.magdy.challenge.tenpo.adapter.delivery.SumEndpoints;
+import com.magdy.challenge.tenpo.adapter.delivery.UserEndpoints;
 import com.magdy.challenge.tenpo.adapter.gateway.PercentageClientImpl;
 import com.magdy.challenge.tenpo.adapter.repository.HistoryAdapterRepository;
 import com.magdy.challenge.tenpo.adapter.repository.KafkaAdapter;
+import com.magdy.challenge.tenpo.adapter.repository.UserAdapterRepository;
 import com.magdy.challenge.tenpo.core.history.service.HistoryService;
 import com.magdy.challenge.tenpo.core.message.service.MessageService;
 import com.magdy.challenge.tenpo.core.percentage.service.PercentageService;
 import com.magdy.challenge.tenpo.core.sum.service.SumService;
+import com.magdy.challenge.tenpo.core.user.service.UserService;
 import com.magdy.challenge.tenpo.infrastructure.repository.dao.HistoryDao;
+import com.magdy.challenge.tenpo.infrastructure.repository.dao.UserDao;
+import com.magdy.challenge.tenpo.infrastructure.security.GeneratorJWT;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.modelmapper.ModelMapper;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class SpringDependenciesBean {
 
     private final HistoryDao historyDao;
+    private final UserDao userDao;
 
     @Value("${spring.kafka.topics.tenpo.challenge.history}")
     private String TOPIC;
@@ -43,8 +47,9 @@ public class SpringDependenciesBean {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
-    public SpringDependenciesBean(HistoryDao historyDao) {
+    public SpringDependenciesBean(HistoryDao historyDao, UserDao userDao) {
         this.historyDao = historyDao;
+        this.userDao = userDao;
     }
 
     @Bean
@@ -115,5 +120,25 @@ public class SpringDependenciesBean {
     @Bean
     public SumEndpoints sumEndpoints() {
         return new SumEndpoints(sumService(), historyService());
+    }
+
+    @Bean
+    public UserEndpoints userEndpoints() {
+        return new UserEndpoints(userService());
+    }
+
+    @Bean
+    public UserAdapterRepository userAdapterRepository() {
+        return new UserAdapterRepository(modelMapper(), userDao);
+    }
+
+    @Bean
+    public GeneratorJWT generatorJWT() {
+        return new GeneratorJWT();
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService(userAdapterRepository(), generatorJWT());
     }
 }
