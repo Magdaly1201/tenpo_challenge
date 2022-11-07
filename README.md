@@ -74,3 +74,14 @@ poder hacer los request y se añadido a cada header del request.
     mantiene mucho tiempo caido no sature nuestra bd.
     -Se utiliza kafka para manejar en manera de cola todo lo que va a la tabla de historico depende de las peticiones 
     puede existir un tiempo de procesamiento.
+
+#### Posibles Mejoras
+    -mas validaciones con expressiones regulares para evitar cualquier vulnerabilidad en cada DTO de entrada.
+    -crear otro microservicio que sea de user y una SDK para manejo de todo lo que es autenticacion y autorizacion.
+    -crear otras excepciones para posibles errores con la conexion de la bd.
+    -Encriptar la password en la bd y no mostrarla a la hora de listar por temas de seguridad.
+    -colocar las properties de conexion con la bd en variables de entorno o archivos de configuracion .env.
+    -agregar mas logger en toda la api asi saber todo el recorrido del usuario.
+    -crear todos los test de junir para todas las clases para cumplir con el coverage deseado
+    -crear un enum para validar los roles de usuarios ("ADMIN" y "USER")
+    -mejorar clean architecture del codigo
